@@ -90,3 +90,10 @@ window.onload = () => {
 };
 const testAudio = new Audio('english-lofi(1).mp3');
 testAudio.play().catch(console.error);
+currentAudio.addEventListener('play', () => {
+  document.body.classList.add('music-playing');
+});
+
+currentAudio.addEventListener('pause', () => {
+  document.body.classList.remove('music-playing');
+});
