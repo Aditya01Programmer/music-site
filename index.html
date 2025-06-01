@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lofi Music Zone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Random Lofi Music Zone 🎧</h1>
+    <button id="bgToggle">Change Background</button>
+  </header>
+
+  <section class="card-container">
+    <div class="music-card" onclick="playMusic('english')">
+      <h2>English Lofi</h2>
+      <p>Calm & relaxing vibes</p>
+    </div>
+    <div class="music-card" onclick="playMusic('hindi')">
+      <h2>Hindi Lofi</h2>
+      <p>Soft and nostalgic feels</p>
+    </div>
+    <div class="music-card" onclick="playMusic('spiritual')">
+      <h2>Spiritual Lofi</h2>
+      <p>Peaceful and mindful tunes</p>
+    </div>
+    <div class="controls">
+  <button onclick="playPrev()">⏮️ Previous</button>
+  <button onclick="togglePlayPause()">⏯️ Play/Pause</button>
+  <button onclick="playNext()">⏭️ Next</button>
+</div>
+  </section>
+<section>
+  <p><em>Music included</em></p>
+  <ul>
+    <li>Desi Kalakar</li>
+    <li>Excuses</li>
+    <li>Heat Waves</li>
+    <li>Pagol</li>
+    <li>Brown Munde</li>
+    <li>Shree Ganesha Deva</li>
+    <li>Shoorveer-3</li>
+    <li>Ghamand Kar</li>
+  </ul>
+</section>
+  <audio id="audioPlayer" controls hidden></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
