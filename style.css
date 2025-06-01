@@ -80,3 +80,14 @@ audio {
   transform: scale(1.05);
   background-color: #ffd891;
 }
+@keyframes movingGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.music-playing {
+  background: linear-gradient(270deg, #a18cd1, #fbc2eb, #84fab0);
+  background-size: 600% 600%;
+  animation: movingGradient 15s ease infinite;
+}
