@@ -23,6 +23,7 @@ function playMusic(type) {
   if (currentAudio) {
     currentAudio.pause();
     currentAudio.currentTime = 0;
+    currentAudio.removeEventListener('ended', playNext); // clean up old listener
   }
 
   currentType = type;
@@ -33,7 +34,11 @@ function playMusic(type) {
 
   currentAudio = new Audio(currentList[currentIndex]);
   currentAudio.loop = false;
-  currentAudio.play();
+
+  // Add listener to auto-play next when song ends
+  currentAudio.addEventListener('ended', playNext);
+
+  currentAudio.play().catch(err => console.error('Playback failed:', err));
 }
 
 function togglePlayPause() {
@@ -48,19 +53,29 @@ function togglePlayPause() {
 function playNext() {
   if (!currentList.length) return;
   currentIndex = (currentIndex + 1) % currentList.length;
-  if (currentAudio) currentAudio.pause();
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.removeEventListener('ended', playNext); // clean up old listener
+  }
 
   currentAudio = new Audio(currentList[currentIndex]);
-  currentAudio.play();
+  currentAudio.loop = false;
+  currentAudio.addEventListener('ended', playNext);
+  currentAudio.play().catch(err => console.error('Playback failed:', err));
 }
 
 function playPrev() {
   if (!currentList.length) return;
   currentIndex = (currentIndex - 1 + currentList.length) % currentList.length;
-  if (currentAudio) currentAudio.pause();
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.removeEventListener('ended', playNext);
+  }
 
   currentAudio = new Audio(currentList[currentIndex]);
-  currentAudio.play();
+  currentAudio.loop = false;
+  currentAudio.addEventListener('ended', playNext);
+  currentAudio.play().catch(err => console.error('Playback failed:', err));
 }
 
 // Only DOM-dependent code inside window.onload
