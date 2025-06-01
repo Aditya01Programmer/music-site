@@ -91,3 +91,6 @@ audio {
   background-size: 600% 600%;
   animation: movingGradient 15s ease infinite;
 }
+body {
+  transition: background 0.5s ease-in-out;
+}
