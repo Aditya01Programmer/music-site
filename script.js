@@ -18,12 +18,27 @@ const songs = {
   spiritual: ['spiritual-lofi-1.mp3', 'spiritual-lofi-2.mp3', 'spiritual-lofi-3.mp3' ,'spiritual-lofi-4.mp3']
 };
 
-// Global functions accessible to HTML inline handlers
+function onPlay() {
+  document.body.classList.add('music-playing');
+}
+
+function onPause() {
+  document.body.classList.remove('music-playing');
+}
+
+function attachAudioListeners(audio) {
+  audio.addEventListener('ended', playNext);
+  audio.addEventListener('play', onPlay);
+  audio.addEventListener('pause', onPause);
+}
+
 function playMusic(type) {
   if (currentAudio) {
     currentAudio.pause();
     currentAudio.currentTime = 0;
-    currentAudio.removeEventListener('ended', playNext); // clean up old listener
+    currentAudio.removeEventListener('ended', playNext);
+    currentAudio.removeEventListener('play', onPlay);
+    currentAudio.removeEventListener('pause', onPause);
   }
 
   currentType = type;
@@ -35,8 +50,7 @@ function playMusic(type) {
   currentAudio = new Audio(currentList[currentIndex]);
   currentAudio.loop = false;
 
-  // Add listener to auto-play next when song ends
-  currentAudio.addEventListener('ended', playNext);
+  attachAudioListeners(currentAudio);
 
   currentAudio.play().catch(err => console.error('Playback failed:', err));
 }
@@ -52,48 +66,44 @@ function togglePlayPause() {
 
 function playNext() {
   if (!currentList.length) return;
+
   currentIndex = (currentIndex + 1) % currentList.length;
+
   if (currentAudio) {
     currentAudio.pause();
-    currentAudio.removeEventListener('ended', playNext); // clean up old listener
+    currentAudio.removeEventListener('ended', playNext);
+    currentAudio.removeEventListener('play', onPlay);
+    currentAudio.removeEventListener('pause', onPause);
   }
 
   currentAudio = new Audio(currentList[currentIndex]);
   currentAudio.loop = false;
-  currentAudio.addEventListener('ended', playNext);
+
+  attachAudioListeners(currentAudio);
+
   currentAudio.play().catch(err => console.error('Playback failed:', err));
 }
 
 function playPrev() {
   if (!currentList.length) return;
+
   currentIndex = (currentIndex - 1 + currentList.length) % currentList.length;
+
   if (currentAudio) {
     currentAudio.pause();
     currentAudio.removeEventListener('ended', playNext);
+    currentAudio.removeEventListener('play', onPlay);
+    currentAudio.removeEventListener('pause', onPause);
   }
 
   currentAudio = new Audio(currentList[currentIndex]);
   currentAudio.loop = false;
-  currentAudio.addEventListener('ended', playNext);
+
+  attachAudioListeners(currentAudio);
+
   currentAudio.play().catch(err => console.error('Playback failed:', err));
 }
 
-// Only DOM-dependent code inside window.onload
 window.onload = () => {
-  const bgToggleBtn = document.getElementById('bgToggle');
-  if (bgToggleBtn) {
-    bgToggleBtn.addEventListener('click', () => {
-      bgIndex = (bgIndex + 1) % backgrounds.length;
-      document.body.style.background = backgrounds[bgIndex];
-    });
-  }
+  // Optionally, initialize something on load
 };
-const testAudio = new Audio('english-lofi(1).mp3');
-testAudio.play().catch(console.error);
-currentAudio.addEventListener('play', () => {
-  document.body.classList.add('music-playing');
-});
-
-currentAudio.addEventListener('pause', () => {
-  document.body.classList.remove('music-playing');
-});
