@@ -13,7 +13,7 @@ let currentType = '';
 let currentIndex = 0;
 
 const songs = {
-  english: ['english-lofi(1).mp3', 'english-lofi(2).mp3'],
+  english: ['english-lofi-1.mp3', 'english-lofi-2.mp3' , 'english-lofi-3.mp3'],
   hindi: ['hindi-lofi-1.mp3', 'hindi-lofi-2.mp3', 'hindi-lofi-6.mp3', 'hindi-lofi-4.mp3', 'hindi-lofi-5.mp3' , 'hindi-lofi-7.mp3' ,'hindi-lofi-8.mp3' ,'hindi-lofi-9.mp3'],
   spiritual: ['spiritual-lofi-1.mp3', 'spiritual-lofi-2.mp3', 'spiritual-lofi-3.mp3' ,'spiritual-lofi-4.mp3' ,'spiritual-lofi-5.mp3']
 };
