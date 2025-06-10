@@ -106,27 +106,3 @@ function playPrev() {
 
   currentAudio.play().catch(err => console.error('Playback failed:', err));
 }
-window.addEventListener("load", function () {
-  if (typeof emailjs !== "undefined") {
-    emailjs.init("aRPd4F2xzQdXj163w"); // ✅ Your public key
-
-    const form = document.getElementById("suggestForm");
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const song = document.getElementById("song").value;
-
-      emailjs.send("service_w6uw5gy", "template_pvaa1cf", {
-        song: song
-      }).then(function () {
-        document.getElementById("thankYouMessage").textContent = "Thanks for your suggestion!";
-        form.reset();
-      }, function (error) {
-        alert("❌ EmailJS Error:\n" + JSON.stringify(error)); // ✅ See error details
-        document.getElementById("thankYouMessage").textContent = "Something went wrong. Try again later.";
-      });
-    });
-  } else {
-    alert("❌ EmailJS library not loaded. Please check your script tag.");
-  }
-});
