@@ -128,4 +128,4 @@ document.getElementById("suggestForm").addEventListener("submit", function(e) {
     console.error("Failed to send:", error);
     document.getElementById("thankYouMessage").textContent = "Something went wrong. Try again later.";
   });
-
+});
