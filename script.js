@@ -125,9 +125,7 @@ document.getElementById("suggestForm").addEventListener("submit", function(e) {
     document.getElementById("thankYouMessage").textContent = "Thanks for your suggestion!";
     document.getElementById("suggestForm").reset();
   }, function(error) {
-    console.error("Failed to send:", error);
+    alert("Failed to send: " + JSON.stringify(error));
     document.getElementById("thankYouMessage").textContent = "Something went wrong. Try again later.";
   });
-});
-const songValue = document.getElementById("song").value;
-alert("Song to send: " + songValue);
+
