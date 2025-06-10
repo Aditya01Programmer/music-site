@@ -110,3 +110,16 @@ function playPrev() {
 window.onload = () => {
   // Optionally, initialize something on load
 };
+document.getElementById("suggestForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  emailjs.send("service_w6uw5gy", "template_sk7wzvf", {
+    song: this.song.value
+  }, "aRPd4F2xzQdXj163w")
+  .then(() => {
+    document.getElementById("thankYouMessage").textContent = "Thanks for your suggestion!";
+    this.reset();
+  }, (error) => {
+    console.error("Failed to send suggestion", error);
+  });
+});
