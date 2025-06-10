@@ -118,7 +118,7 @@ window.addEventListener("load", function () {
 
       const song = document.getElementById("song").value;
 
-      emailjs.send("service_w6uw5gy", "template_sk7wzvf", {
+      emailjs.send("service_w6uw5gy", "template_pvaa1cf", {
         song: song
       }).then(function () {
         document.getElementById("thankYouMessage").textContent = "Thanks for your suggestion!";
