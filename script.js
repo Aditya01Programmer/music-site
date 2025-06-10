@@ -110,16 +110,22 @@ function playPrev() {
 window.onload = () => {
   // Optionally, initialize something on load
 };
+// Initialize EmailJS
+(function() {
+  emailjs.init("aRPd4F2xzQdXj163w"); // ✅ your public key
+})();
+
+// Suggest song form handler
 document.getElementById("suggestForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
   emailjs.send("service_w6uw5gy", "template_sk7wzvf", {
-    song: this.song.value
-  }, "aRPd4F2xzQdXj163w")
-  .then(() => {
+    song: this.song.value // Make sure 'song' exists in your template
+  }).then(function() {
     document.getElementById("thankYouMessage").textContent = "Thanks for your suggestion!";
-    this.reset();
-  }, (error) => {
-    console.error("Failed to send suggestion", error);
+    document.getElementById("suggestForm").reset();
+  }, function(error) {
+    console.error("Failed to send:", error);
+    document.getElementById("thankYouMessage").textContent = "Something went wrong. Try again later.";
   });
 });
