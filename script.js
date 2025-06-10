@@ -129,3 +129,5 @@ document.getElementById("suggestForm").addEventListener("submit", function(e) {
     document.getElementById("thankYouMessage").textContent = "Something went wrong. Try again later.";
   });
 });
+const songValue = document.getElementById("song").value;
+alert("Song to send: " + songValue);
