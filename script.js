@@ -106,5 +106,3 @@ function playPrev() {
 
   currentAudio.play().catch(err => console.error('Playback failed:', err));
 }
-
-
