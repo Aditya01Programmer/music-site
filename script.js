@@ -109,23 +109,23 @@ function playPrev() {
 
 window.onload = () => {
   // Optionally, initialize something on load
-};
-// Initialize EmailJS
-(function() {
-  emailjs.init("aRPd4F2xzQdXj163w"); // ✅ your public key
-})();
+}
+window.addEventListener("load", function () {
+  // ✅ Initialize EmailJS
+  emailjs.init("aRPd4F2xzQdXj163w");
 
-// Suggest song form handler
-document.getElementById("suggestForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+  // ✅ Suggest song form handler
+  document.getElementById("suggestForm").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  emailjs.send("service_w6uw5gy", "template_sk7wzvf", {
-    song: document.getElementById("song").value
-  }).then(function() {
-    document.getElementById("thankYouMessage").textContent = "Thanks for your suggestion!";
-    document.getElementById("suggestForm").reset();
-  }, function(error) {
-    console.error("Failed to send:", error);
-    document.getElementById("thankYouMessage").textContent = "Something went wrong. Try again later.";
+    emailjs.send("service_w6uw5gy", "template_sk7wzvf", {
+      song: document.getElementById("song").value
+    }).then(function () {
+      document.getElementById("thankYouMessage").textContent = "Thanks for your suggestion!";
+      document.getElementById("suggestForm").reset();
+    }, function (error) {
+      console.error("Failed to send:", error);
+      document.getElementById("thankYouMessage").textContent = "Something went wrong. Try again later.";
+    });
   });
 });
