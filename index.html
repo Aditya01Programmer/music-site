@@ -65,27 +65,8 @@
   <p id="thankYouMessage" style="color: green;"></p>
   </section>
   <!-- EmailJS CDN must be loaded BEFORE your script -->
-  <script type="module">
-  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
-
-  emailjs.init("aRPd4F2xzQdXj163w");
-
-  document.getElementById("suggestForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const songValue = document.getElementById("song").value;
-
-    emailjs.send("service_w6uw5gy", "template_sk7wzvf", {
-      song: songValue
-    }).then(function () {
-      document.getElementById("thankYouMessage").textContent = "Thanks for your suggestion!";
-      document.getElementById("suggestForm").reset();
-    }, function (error) {
-      console.error("Failed to send:", error);
-      document.getElementById("thankYouMessage").textContent = "Something went wrong. Try again later.";
-    });
-  });
-  </script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script src="script.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
