@@ -120,7 +120,7 @@ document.getElementById("suggestForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
   emailjs.send("service_w6uw5gy", "template_sk7wzvf", {
-    song: this.song.value // Make sure 'song' exists in your template
+    song: document.getElementById("song").value
   }).then(function() {
     document.getElementById("thankYouMessage").textContent = "Thanks for your suggestion!";
     document.getElementById("suggestForm").reset();
