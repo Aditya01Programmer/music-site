@@ -67,7 +67,10 @@ function togglePlayPause() {
 function playNext() {
   if (!currentList.length) return;
 
-  currentIndex = (currentIndex + 1) % currentList.length;
+  currentIndex++;
+  if (currentIndex >= currentList.length) {
+    currentIndex = 0; // restart from beginning
+  }
 
   if (currentAudio) {
     currentAudio.pause();
