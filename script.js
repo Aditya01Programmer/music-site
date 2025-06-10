@@ -125,7 +125,7 @@ document.getElementById("suggestForm").addEventListener("submit", function(e) {
     document.getElementById("thankYouMessage").textContent = "Thanks for your suggestion!";
     document.getElementById("suggestForm").reset();
   }, function(error) {
-    alert("Failed to send: " + JSON.stringify(error));
+    console.error("Failed to send:", error);
     document.getElementById("thankYouMessage").textContent = "Something went wrong. Try again later.";
   });
 
