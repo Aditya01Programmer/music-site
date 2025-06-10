@@ -67,10 +67,13 @@ function togglePlayPause() {
 function playNext() {
   if (!currentList.length) return;
 
-  currentIndex++;
-  if (currentIndex >= currentList.length) {
-    currentIndex = 0; // restart from beginning
-  }
+  // Pick a random song that's not the current one (optional)
+  let nextIndex;
+  do {
+    nextIndex = Math.floor(Math.random() * currentList.length);
+  } while (currentList.length > 1 && nextIndex === currentIndex);
+
+  currentIndex = nextIndex;
 
   if (currentAudio) {
     currentAudio.pause();
