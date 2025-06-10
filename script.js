@@ -107,12 +107,10 @@ function playPrev() {
   currentAudio.play().catch(err => console.error('Playback failed:', err));
 }
 window.addEventListener("load", function () {
-  // ✅ Initialize EmailJS
-  emailjs.init("aRPd4F2xzQdXj163w");
+  if (typeof emailjs !== "undefined") {
+    emailjs.init("aRPd4F2xzQdXj163w"); // ✅ Your public key
 
-  // ✅ Handle form submit
-  const form = document.getElementById("suggestForm");
-  if (form) {
+    const form = document.getElementById("suggestForm");
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
@@ -124,9 +122,11 @@ window.addEventListener("load", function () {
         document.getElementById("thankYouMessage").textContent = "Thanks for your suggestion!";
         form.reset();
       }, function (error) {
-  alert("Error Details: " + JSON.stringify(error)); // 👈 Shows exact error
-  document.getElementById("thankYouMessage").textContent = "Something went wrong. Try again later.";
-      }
+        alert("❌ EmailJS Error:\n" + JSON.stringify(error)); // ✅ See error details
+        document.getElementById("thankYouMessage").textContent = "Something went wrong. Try again later.";
+      });
     });
+  } else {
+    alert("❌ EmailJS library not loaded. Please check your script tag.");
   }
 });
