@@ -124,9 +124,9 @@ window.addEventListener("load", function () {
         document.getElementById("thankYouMessage").textContent = "Thanks for your suggestion!";
         form.reset();
       }, function (error) {
-        console.error("Email send failed:", error);
-        document.getElementById("thankYouMessage").textContent = "Something went wrong. Try again later.";
-      });
+  alert("Error Details: " + JSON.stringify(error)); // 👈 Shows exact error
+  document.getElementById("thankYouMessage").textContent = "Something went wrong. Try again later.";
+      }
     });
   }
 });
