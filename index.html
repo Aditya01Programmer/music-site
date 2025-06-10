@@ -54,12 +54,17 @@
     <li> Hello From The Other Side 👋</li>
   </ul>
 </section>
-  <form id="suggestForm">
-  <input type="text" name="song" placeholder="Suggest a song or YouTube link" required>
-  <button type="submit">Submit</button>
-</form>
-<p id="thankYouMessage"></p>
   <audio id="audioPlayer" controls hidden></audio>
+  <section id="suggest">
+  <h3>🎵 Suggest a Song</h3>
+  <form id="suggestForm">
+    <input type="text" name="song" placeholder="Suggest a song or YouTube link" required>
+    <button type="submit">Submit</button>
+  </form>
+  <p id="thankYouMessage" style="color: green;"></p>
+  </section>
+  <!-- EmailJS CDN must be loaded BEFORE your script -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
