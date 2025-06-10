@@ -106,3 +106,27 @@ function playPrev() {
 
   currentAudio.play().catch(err => console.error('Playback failed:', err));
 }
+window.addEventListener("load", function () {
+  // ✅ Initialize EmailJS
+  emailjs.init("aRPd4F2xzQdXj163w");
+
+  // ✅ Handle form submit
+  const form = document.getElementById("suggestForm");
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const song = document.getElementById("song").value;
+
+      emailjs.send("service_w6uw5gy", "template_sk7wzvf", {
+        song: song
+      }).then(function () {
+        document.getElementById("thankYouMessage").textContent = "Thanks for your suggestion!";
+        form.reset();
+      }, function (error) {
+        console.error("Email send failed:", error);
+        document.getElementById("thankYouMessage").textContent = "Something went wrong. Try again later.";
+      });
+    });
+  }
+});
