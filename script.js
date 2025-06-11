@@ -17,7 +17,14 @@ const songs = {
   hindi: ['hindi-lofi-1.mp3', 'hindi-lofi-2.mp3', 'hindi-lofi-6.mp3', 'hindi-lofi-4.mp3', 'hindi-lofi-5.mp3' , 'hindi-lofi-7.mp3' ,'hindi-lofi-8.mp3' ,'hindi-lofi-9.mp3'],
   spiritual: ['spiritual-lofi-1.mp3', 'spiritual-lofi-2.mp3', 'spiritual-lofi-3.mp3' ,'spiritual-lofi-4.mp3' ,'spiritual-lofi-5.mp3']
 };
-
+function shuffle(array) {
+  let copy = [...array];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
 function onPlay() {
   document.body.classList.add('music-playing');
 }
@@ -36,22 +43,19 @@ function playMusic(type) {
   if (currentAudio) {
     currentAudio.pause();
     currentAudio.currentTime = 0;
-    currentAudio.removeEventListener('ended', playNext);
-    currentAudio.removeEventListener('play', onPlay);
-    currentAudio.removeEventListener('pause', onPause);
   }
 
   currentType = type;
-  currentList = songs[type];
-  currentIndex = Math.floor(Math.random() * currentList.length);
+  currentList = shuffle(songs[type]); // 🎯 Shuffling once
+  currentIndex = 0;
 
-  console.log("Playing file:", currentList[currentIndex]);
-
-  currentAudio = new Audio(currentList[currentIndex]);
+  playCurrentSong();
+}
+function playCurrentSong() {
+  const song = currentList[currentIndex];
+  currentAudio = new Audio(song);
   currentAudio.loop = false;
-
   attachAudioListeners(currentAudio);
-
   currentAudio.play().catch(err => console.error('Playback failed:', err));
 }
 
@@ -63,49 +67,20 @@ function togglePlayPause() {
     currentAudio.pause();
   }
 }
-
 function playNext() {
   if (!currentList.length) return;
 
-  // Pick a random song that's not the current one (optional)
-  let nextIndex;
-  do {
-    nextIndex = Math.floor(Math.random() * currentList.length);
-  } while (currentList.length > 1 && nextIndex === currentIndex);
-
-  currentIndex = nextIndex;
-
-  if (currentAudio) {
-    currentAudio.pause();
-    currentAudio.removeEventListener('ended', playNext);
-    currentAudio.removeEventListener('play', onPlay);
-    currentAudio.removeEventListener('pause', onPause);
+  currentIndex++;
+  if (currentIndex >= currentList.length) {
+    currentList = shuffle(currentList); // 🎯 Reshuffle once full list is played
+    currentIndex = 0;
   }
 
-  currentAudio = new Audio(currentList[currentIndex]);
-  currentAudio.loop = false;
-
-  attachAudioListeners(currentAudio);
-
-  currentAudio.play().catch(err => console.error('Playback failed:', err));
+  playCurrentSong();
 }
-
 function playPrev() {
   if (!currentList.length) return;
 
   currentIndex = (currentIndex - 1 + currentList.length) % currentList.length;
-
-  if (currentAudio) {
-    currentAudio.pause();
-    currentAudio.removeEventListener('ended', playNext);
-    currentAudio.removeEventListener('play', onPlay);
-    currentAudio.removeEventListener('pause', onPause);
-  }
-
-  currentAudio = new Audio(currentList[currentIndex]);
-  currentAudio.loop = false;
-
-  attachAudioListeners(currentAudio);
-
-  currentAudio.play().catch(err => console.error('Playback failed:', err));
+  playCurrentSong();
 }
