@@ -52,6 +52,13 @@ function playMusic(type) {
   playCurrentSong();
 }
 function playCurrentSong() {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.removeEventListener('ended', playNext);
+    currentAudio.removeEventListener('play', onPlay);
+    currentAudio.removeEventListener('pause', onPause);
+  }
+
   const song = currentList[currentIndex];
   currentAudio = new Audio(song);
   currentAudio.loop = false;
