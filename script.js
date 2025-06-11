@@ -52,6 +52,8 @@ function playMusic(type) {
   playCurrentSong();
 }
 function playCurrentSong() {
+  const audio = document.getElementById("audioPlayer");
+
   if (currentAudio) {
     currentAudio.pause();
     currentAudio.removeEventListener('ended', playNext);
@@ -59,10 +61,12 @@ function playCurrentSong() {
     currentAudio.removeEventListener('pause', onPause);
   }
 
-  const song = currentList[currentIndex];
-  currentAudio = new Audio(song);
-  currentAudio.loop = false;
-  attachAudioListeners(currentAudio);
+  audio.src = currentList[currentIndex];
+  audio.loop = false;
+
+  attachAudioListeners(audio);
+  currentAudio = audio;
+
   currentAudio.play().catch(err => console.error('Playback failed:', err));
 }
 
