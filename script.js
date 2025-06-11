@@ -84,30 +84,3 @@ function playPrev() {
   currentIndex = (currentIndex - 1 + currentList.length) % currentList.length;
   playCurrentSong();
 }
-// GENRE SWITCHER BUTTON SYSTEM FOR YOUR MUSIC SITE
-const genreGroups = [
-  ["english", "hindi", "spiritual"],
-  ["phonk", "nature", "anime"],
-  ["bhakti", "rain", "study"]
-];
-let currentGenreGroup = 0;
-
-function toggleGenre() {
-  currentGenreGroup = (currentGenreGroup + 1) % genreGroups.length;
-  renderGenreCards(genreGroups[currentGenreGroup]);
-}
-function renderGenreCards(genres) {
-  const container = document.querySelector(".card-container"); // ✅ Fix target
-  container.innerHTML = ""; // Clear previous cards
-
-  genres.forEach((genre) => {
-    const card = document.createElement("div");
-    card.className = "music-card fade-in"; // Optional animation
-    card.innerHTML = `<h2>${genre.charAt(0).toUpperCase() + genre.slice(1)} Lofi</h2><p>Click to play</p>`;
-    card.onclick = () => playMusic(genre);
-    container.appendChild(card);
-  });
-}
-window.addEventListener("DOMContentLoaded", () => {
-  renderGenreCards(genreGroups[currentGenreGroup]);
-});
