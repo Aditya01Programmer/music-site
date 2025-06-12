@@ -17,7 +17,7 @@ const songs = {
   hindi: ['hindi-lofi-1.mp3', 'hindi-lofi-2.mp3', 'hindi-lofi-6.mp3', 'hindi-lofi-4.mp3', 'hindi-lofi-5.mp3' , 'hindi-lofi-7.mp3' ,'hindi-lofi-8.mp3' ,'hindi-lofi-9.mp3' ,'hindi-lofi-10.mp3'],
   spiritual: ['spiritual-lofi-1.mp3', 'spiritual-lofi-2.mp3', 'spiritual-lofi-3.mp3' ,'spiritual-lofi-4.mp3' ,'spiritual-lofi-5.mp3'],
   phonk: ['phonk-1.mp3' ,'phonk-2.mp3' ,'phonk-3.mp3' ,'phonk-4.mp3'],
-  suprise: ['suprise-1.mp3']
+  suprise: ['suprise-1.mp3' ,'suprise-2.mp3']
 };
 function shuffle(array) {
   let copy = [...array];
